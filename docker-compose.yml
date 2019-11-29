@@ -1,0 +1,35 @@
+version: "3.3"
+
+services:
+ db:
+    image: mysql:5.7
+    container_name: 'mysql'
+    restart: always
+    environment:
+     MYSQL_DATABASE: 'schoolmanagement'
+     MYSQL_USER: 'admin'
+     MYSQL_PASSWORD: 'admin123'
+     MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+     - '3306:3306'
+    expose:
+     - '3306'
+    volumes:
+     - my-db:/var/lib/mysql
+
+ apache:
+    build: ./apache
+    image: myimage
+    container_name: 'apache'
+    restart: 'always'
+    ports:
+      - "80:80"
+    volumes:
+      - ./www:/var/www/html
+      - ./php/php.ini:/usr/local/etc/php/php.ini
+      - ./sites-enabled:/etc/apache2/sites-enabled
+      - apache-logs:/var/log/apache2
+
+volumes:
+   apache-logs:
+   my-db:
