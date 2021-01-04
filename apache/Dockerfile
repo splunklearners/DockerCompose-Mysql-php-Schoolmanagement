@@ -7,8 +7,7 @@
 FROM centos:centos7
 LABEL maintainer="Gustavo Oliveira <cetres@gmail.com>"
 
-RUN yum -y update && \
-    yum -y install \
+RUN     yum -y install \
         epel-release \
         httpd \
         php \
